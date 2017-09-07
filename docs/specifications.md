@@ -31,6 +31,30 @@ rectangle Bowling {
 ```
 
 ### ユースケース１：ストライク
+```ruby {cmd=true}
+class Game
+  def initialize
+    @score
+  end
+
+  def score
+    @score
+  end
+
+  def add(pin)
+    @score =+ pin
+  end
+end
+
+require 'test/unit'
+class TestGame < Test::Unit::TestCase
+  def test_score
+    g = Game.new
+    g.add(10)
+    assert_equal 10, g.score    
+  end
+end
+```
 
 ### ユースケース２：スペア
 
