@@ -32,9 +32,11 @@ rectangle Bowling {
 
 ### ユースケース１：ストライク
 ```ruby {cmd=true}
+require 'test/unit'
+
 class Game
   def initialize
-    @score
+    @score = 0
   end
 
   def score
@@ -46,7 +48,6 @@ class Game
   end
 end
 
-require 'test/unit'
 class TestGame < Test::Unit::TestCase
   def test_score
     g = Game.new

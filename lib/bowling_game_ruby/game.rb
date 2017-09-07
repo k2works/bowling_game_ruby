@@ -9,7 +9,7 @@ module BowlingGameRuby
     end
 
     def add(pins)
-      @score = pins
+      @score += pins
     end
   end
 end

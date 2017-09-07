@@ -14,14 +14,15 @@
 ## ユースケース
   
 
-![](assets/300bdaf8e14310a5b12ecf1422e44f030.png?0.34401098456156487)  
+![](assets/300bdaf8e14310a5b12ecf1422e44f030.png?0.7181293530052326)  
   
 ### ユースケース１：ストライク
   
 ```ruby
+require 'test/unit'
 class Game
   def initialize
-    @score
+    @score = 0
   end
   def score
     @score
@@ -30,7 +31,6 @@ class Game
     @score =+ pin
   end
 end
-require 'test/unit'
 class TestGame < Test::Unit::TestCase
   def test_score
     g = Game.new
@@ -39,16 +39,16 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/xvgqoyzpw_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/srw7zrh7m_code_chunk
 Started
 .
 
-Finished in 0.000375 seconds.
+Finished in 0.000394 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-2666.67 tests/s, 2666.67 assertions/s
+2538.07 tests/s, 2538.07 assertions/s
 </pre>
   
 ### ユースケース２：スペア
@@ -67,7 +67,7 @@ Finished in 0.000375 seconds.
 ## コアモデル
   
 
-![](assets/300bdaf8e14310a5b12ecf1422e44f031.png?0.8330462002944559)  
+![](assets/300bdaf8e14310a5b12ecf1422e44f031.png?0.4593025962436903)  
   
 ## 参照
   
