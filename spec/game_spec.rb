@@ -50,4 +50,13 @@ RSpec.describe BowlingGameRuby::Game do
       end
     end
   end
+
+  describe '#get_current_frame' do
+    context 'when one throw' do
+      it 'return first frame' do
+        g.add(5)
+        expect(g.get_current_frame).to eq(1)
+      end
+    end
+  end
 end
