@@ -11,5 +11,9 @@ module BowlingGameRuby
     def add(pins)
       @score += pins
     end
+
+    def score_for_frame(the_frame)
+      0
+    end
   end
 end
