@@ -1,4 +1,6 @@
-require "spec_helper"
+# frozen_string_literal: true
+
+require 'spec_helper'
 include BowlingGameRuby
 
 RSpec.describe BowlingGameRuby::Game do
@@ -8,7 +10,7 @@ RSpec.describe BowlingGameRuby::Game do
         g = Game.new
         g.add(5)
         expect(g.score).to eq(5)
-      end      
+      end
     end
 
     context 'when two throw' do
@@ -17,7 +19,7 @@ RSpec.describe BowlingGameRuby::Game do
         g.add(5)
         g.add(4)
         expect(g.score).to eq(9)
-      end      
-    end    
+      end
+    end
   end
 end

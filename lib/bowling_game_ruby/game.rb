@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 module BowlingGameRuby
   class Game
+    attr_reader :score
+
     def initialize
       @score = 0
-    end
-
-    def score
-      @score
     end
 
     def add(pins)
