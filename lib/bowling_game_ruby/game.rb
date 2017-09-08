@@ -25,7 +25,14 @@ module BowlingGameRuby
         ball += 1
         second_throw = @throws[ball]
         ball += 1
-        score += first_throw + second_throw
+        frame_score = first_throw + second_throw
+
+        # スペアの得点計算には次のフレームの第１投が必要
+        score += if frame_score == 10
+                   frame_score + @throws[ball]
+                 else
+                   frame_score
+                 end
         current_frame += 1
       end
       score
