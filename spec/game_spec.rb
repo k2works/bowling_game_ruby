@@ -23,13 +23,7 @@ RSpec.describe BowlingGameRuby::Game do
     end
 
     context 'when spare' do
-      it 'scored' do
-        g.add(3)
-        g.add(7)
-        g.add(3)
-        g.add(2)
-        expect(g.score).to eq(18)
-      end
+      it 'scored'
     end
   end
 
@@ -52,6 +46,7 @@ RSpec.describe BowlingGameRuby::Game do
         g.add(3)
         g.add(2)
         expect(g.score_for_frame(1)).to eq(13)
+        expect(g.score_for_frame(2)).to eq(18)
       end
     end
   end
