@@ -21,8 +21,11 @@ module BowlingGameRuby
       ball = 0
       current_frame = 0
       while current_frame < the_frame
-        score += @throws[ball] + @throws[ball + 1]
-        ball += 2
+        first_throw = @throws[ball]
+        ball += 1
+        second_throw = @throws[ball]
+        ball += 1
+        score += first_throw + second_throw
         current_frame += 1
       end
       score
