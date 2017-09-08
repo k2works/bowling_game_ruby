@@ -39,7 +39,7 @@ module BowlingGameRuby
     end
 
     def get_current_frame
-      1
+      1 + (@current_throw - 1) / 2
     end
   end
 end
