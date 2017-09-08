@@ -8,7 +8,7 @@ module BowlingGameRuby
       @score = 0
       @current_throw = 0
       @throws = Array.new(21, 0)
-      @current_frame = 0
+      @current_frame = 1
       @first_throw = true
     end
 
@@ -49,9 +49,9 @@ module BowlingGameRuby
 
     def addjust_current_frame
       if @first_throw
-        @current_frame += 1
         @first_throw = false
       else
+        @current_frame += 1
         @first_throw = true
       end
     end
