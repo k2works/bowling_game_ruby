@@ -8,12 +8,21 @@ module BowlingGameRuby
       @score = 0
       @current_throw = 0
       @throws = Array.new(21, 0)
+      @current_frame = 0
+      @first_throw = true
     end
 
     def add(pins)
       @throws[@current_throw] = pins
       @current_throw += 1
       @score += pins
+
+      if @first_throw
+        @current_frame += 1
+        @first_throw = false
+      else
+        @first_throw = true
+      end
     end
 
     def score_for_frame(the_frame)
@@ -39,7 +48,7 @@ module BowlingGameRuby
     end
 
     def get_current_frame
-      1 + (@current_throw - 1) / 2
+      @current_frame
     end
   end
 end
