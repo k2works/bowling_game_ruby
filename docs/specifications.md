@@ -38,18 +38,18 @@ class Game
   def initialize
     @score = 0
   end
+  
+  def add(pin)
+    @score =+ pin
+  end
 
   def score
     @score
   end
-
-  def add(pin)
-    @score =+ pin
-  end
 end
 
 class TestGame < Test::Unit::TestCase
-  def test_score
+  def test_strike
     g = Game.new
     g.add(10)
     assert_equal 10, g.score    
@@ -58,6 +58,45 @@ end
 ```
 
 ### ユースケース２：スペア
+```ruby {cmd=true}
+require 'test/unit'
+
+class Game
+  def initialize
+    @score = 0
+    @current_throw = 0
+    @throws = Array.new(21,0)
+  end
+
+  def add(pin)
+    @throws[@current_throw] = pin    
+    @current_throw += 1
+  end  
+
+  def score        
+    first_throw = @throws[0]
+    second_throw = @throws[1]
+    third_throw = @throws[2]
+
+    score = first_throw + second_throw
+    if score == 10
+      @score = score + third_throw
+    else
+      @score = score
+    end
+  end
+end
+
+class TestGame < Test::Unit::TestCase
+  def test_spare
+    g = Game.new
+    g.add(7)
+    g.add(3)
+    g.add(3)
+    assert_equal 13, g.score
+  end
+end
+```
 
 ### ユースケース３：ガター
 
