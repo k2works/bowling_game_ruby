@@ -4,10 +4,11 @@ require 'spec_helper'
 include BowlingGameRuby
 
 RSpec.describe BowlingGameRuby::Game do
+  let(:g) { Game.new }
+
   describe '#score' do
     context 'when one throw' do
       it 'scored' do
-        g = Game.new
         g.add(5)
         expect(g.score).to eq(5)
       end
@@ -15,7 +16,6 @@ RSpec.describe BowlingGameRuby::Game do
 
     context 'when two throw' do
       it 'scored' do
-        g = Game.new
         g.add(5)
         g.add(4)
         expect(g.score).to eq(9)
@@ -26,7 +26,6 @@ RSpec.describe BowlingGameRuby::Game do
   describe '#score_for_frame' do
     context 'when four throws' do
       it 'scored' do
-        g = Game.new
         g.add(5)
         g.add(4)
         g.add(7)
@@ -38,7 +37,6 @@ RSpec.describe BowlingGameRuby::Game do
 
     context 'when spare' do
       it 'scored' do
-        g = Game.new
       end
     end
   end
