@@ -12,6 +12,10 @@ module BowlingGameRuby
       @first_throw = true
     end
 
+    def score
+      score_for_frame(get_current_frame-1)
+    end
+
     def add(pins)
       @throws[@current_throw] = pins
       @current_throw += 1
