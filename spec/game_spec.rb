@@ -37,7 +37,7 @@ RSpec.describe BowlingGameRuby::Game do
 
   describe '#score_for_frame' do
     context 'when four throws' do
-      it 'scored' do
+      it 'scored by frame' do
         g.add(5)
         g.add(4)
         g.add(7)
@@ -48,7 +48,7 @@ RSpec.describe BowlingGameRuby::Game do
     end
 
     context 'when spare' do
-      it 'scored' do
+      it 'scored by frame' do
         g.add(3)
         g.add(7)
         g.add(3)
@@ -59,7 +59,7 @@ RSpec.describe BowlingGameRuby::Game do
     end
 
     context 'when strike' do
-      it 'scored' do
+      it 'scored by frame' do
         g.add(10)
         g.add(3)
         g.add(6)
