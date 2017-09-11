@@ -24,6 +24,15 @@ RSpec.describe BowlingGameRuby::Game do
         expect(g.score).to eq(18)
       end
     end
+
+    context 'when strike' do
+      it 'scored' do
+        g.add(10)
+        g.add(3)
+        g.add(6)
+        expect(g.score).to eq(28)
+      end
+    end
   end
 
   describe '#score_for_frame' do
@@ -46,6 +55,15 @@ RSpec.describe BowlingGameRuby::Game do
         g.add(2)
         expect(g.score_for_frame(1)).to eq(13)
         expect(g.score_for_frame(2)).to eq(18)
+      end
+    end
+
+    context 'when strike' do
+      it 'scored' do
+        g.add(10)
+        g.add(3)
+        g.add(6)
+        expect(g.score_for_frame(1)).to eq(19)
       end
     end
   end
