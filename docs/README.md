@@ -14,7 +14,7 @@
 ## ユースケース
   
 
-![](assets/300bdaf8e14310a5b12ecf1422e44f030.png?0.43065633577878115)  
+![](assets/300bdaf8e14310a5b12ecf1422e44f030.png?0.2931703642303152)  
   
 ### ユースケース１：ストライク
   
@@ -23,33 +23,44 @@ require 'test/unit'
 class Game
   def initialize
     @score = 0
+    @current_throw = 0
+    @throws = Array.new(21,0)
   end
-  
   def add(pin)
-    @score =+ pin
+    @throws[@current_throw] = pin    
+    @current_throw += 1
   end
   def score
-    @score
+    first_throw = @throws[0]
+    second_throw = @throws[1]
+    third_throw = @throws[2]
+    if first_throw == 10
+      first_frame_score = second_throw + third_throw      
+      second_frame_score = second_throw + third_throw
+      @score = 10 + first_frame_score + second_frame_score
+    end
   end
 end
 class TestGame < Test::Unit::TestCase
   def test_strike
     g = Game.new
     g.add(10)
-    assert_equal 10, g.score    
+    g.add(3)
+    g.add(6)
+    assert_equal 28, g.score    
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/9nxabq35q_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/n1a9e4juv_code_chunk
 Started
 .
 
-Finished in 0.000412 seconds.
+Finished in 0.000599 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-2427.18 tests/s, 2427.18 assertions/s
+1669.45 tests/s, 1669.45 assertions/s
 </pre>
   
 ### ユースケース２：スペア
@@ -88,16 +99,16 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/7ui5di20e_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/9f4t56r46_code_chunk
 Started
 .
 
-Finished in 0.000423 seconds.
+Finished in 0.000419 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-2364.07 tests/s, 2364.07 assertions/s
+2386.63 tests/s, 2386.63 assertions/s
 </pre>
   
 ### ユースケース３：ガター
@@ -113,7 +124,7 @@ Finished in 0.000423 seconds.
 ## コアモデル
   
 
-![](assets/300bdaf8e14310a5b12ecf1422e44f031.png?0.18931336830301837)  
+![](assets/300bdaf8e14310a5b12ecf1422e44f031.png?0.9102147573643398)  
   
 ## 参照
   

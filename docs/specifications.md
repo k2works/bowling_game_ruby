@@ -37,14 +37,25 @@ require 'test/unit'
 class Game
   def initialize
     @score = 0
+    @current_throw = 0
+    @throws = Array.new(21,0)
   end
-  
+
   def add(pin)
-    @score =+ pin
+    @throws[@current_throw] = pin    
+    @current_throw += 1
   end
 
   def score
-    @score
+    first_throw = @throws[0]
+    second_throw = @throws[1]
+    third_throw = @throws[2]
+
+    if first_throw == 10
+      first_frame_score = second_throw + third_throw      
+      second_frame_score = second_throw + third_throw
+      @score = 10 + first_frame_score + second_frame_score
+    end
   end
 end
 
@@ -52,7 +63,9 @@ class TestGame < Test::Unit::TestCase
   def test_strike
     g = Game.new
     g.add(10)
-    assert_equal 10, g.score    
+    g.add(3)
+    g.add(6)
+    assert_equal 28, g.score    
   end
 end
 ```
