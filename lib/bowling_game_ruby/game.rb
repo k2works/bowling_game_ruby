@@ -20,7 +20,7 @@ module BowlingGameRuby
       @throws[@current_throw] = pins
       @current_throw += 1
       @score += pins
-      addjust_current_frame
+      addjust_current_frame(pins)
     end
 
     def score_for_frame(the_frame)
@@ -32,11 +32,7 @@ module BowlingGameRuby
         ball += 1
 
         if first_throw == 10
-          second_throw = @throws[ball]
-          third_throw = @throws[ball + 1]
-          frame_score = first_throw + second_throw + third_throw
-          score = frame_score
-          current_frame += 1
+          score += 10 + @throws[ball] + @throws[ball + 1]
         else
           second_throw = @throws[ball]
           ball += 1
@@ -48,8 +44,8 @@ module BowlingGameRuby
                    else
                      frame_score
                    end
-          current_frame += 1
         end
+        current_frame += 1
       end
       score
     end
@@ -60,9 +56,9 @@ module BowlingGameRuby
 
     private
 
-    def addjust_current_frame
+    def addjust_current_frame(pins)
       if @first_throw
-        if @throws[@current_throw - 1] == 10
+        if pins == 10 # ストライク
           @current_frame += 1
           @first_throw = true
         else
