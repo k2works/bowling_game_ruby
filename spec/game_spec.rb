@@ -33,6 +33,15 @@ RSpec.describe BowlingGameRuby::Game do
         expect(g.score).to eq(28)
       end
     end
+
+    context 'when perfect game' do
+      it 'scored' do
+        12.times do
+          g.add(10)
+        end
+        expect(g.score).to eq(300)
+      end
+    end
   end
 
   describe '#score_for_frame' do
@@ -98,6 +107,15 @@ RSpec.describe BowlingGameRuby::Game do
         g.add(3)
         g.add(2)
         expect(g.get_current_frame).to eq(3)
+      end
+    end
+
+    context 'when perfect game' do
+      it 'return 10th frame' do
+        12.times do
+          g.add(10)
+        end
+        expect(g.get_current_frame).to eq(10)
       end
     end
   end
