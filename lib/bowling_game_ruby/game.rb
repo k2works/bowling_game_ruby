@@ -51,7 +51,7 @@ module BowlingGameRuby
     end
 
     def get_current_frame
-      @current_frame
+      [11 ,@current_frame].min
     end
 
     private
