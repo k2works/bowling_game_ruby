@@ -23,6 +23,16 @@ RSpec.describe BowlingGameRuby::Game do
         g.add(2)
         expect(g.score).to eq(18)
       end
+
+      it 'scored' do
+        9.times do
+          g.add(10)
+        end
+        g.add(9)
+        g.add(1)
+        g.add(1)
+        expect(g.score).to eq(270)
+      end
     end
 
     context 'when strike' do
