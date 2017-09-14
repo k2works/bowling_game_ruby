@@ -55,6 +55,16 @@ RSpec.describe BowlingGameRuby::Game do
         expect(g.score).to eq(20)
       end
     end
+
+    context 'when playing one game' do
+      it 'scored' do
+        pins = [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6]
+        pins.each do |pin|
+          g.add(pin)
+        end
+        expect(g.score).to eq(133)
+      end
+    end
   end
 
   describe '#score_for_frame' do
