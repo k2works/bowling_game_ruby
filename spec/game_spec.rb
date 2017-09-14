@@ -42,6 +42,19 @@ RSpec.describe BowlingGameRuby::Game do
         expect(g.score).to eq(300)
       end
     end
+
+    context 'when 10th frame' do
+      it 'scored' do
+        9.times do
+          g.add(0)
+          g.add(0)
+        end
+        g.add(2)
+        g.add(8)  # 10番目のフレームのスペア
+        g.add(10) # 配列の最後にストライク
+        expect(g.score).to eq(20)
+      end
+    end
   end
 
   describe '#score_for_frame' do
