@@ -27,12 +27,12 @@ module BowlingGameRuby
       score = 0
       @ball = 0
       current_frame = 0
-      
+
       while current_frame < the_frame
-        if strike
+        if strike?
           @ball += 1
           score += 10 + next_two_balls
-        elsif spare
+        elsif spare?
           @ball += 2
           score += 10 + next_ball
         else
@@ -65,7 +65,7 @@ module BowlingGameRuby
       end
     end
 
-    def strike
+    def strike?
       @throws[@ball] == 10
     end
 
@@ -73,7 +73,7 @@ module BowlingGameRuby
       @throws[@ball] + @throws[@ball + 1]
     end
 
-    def spare
+    def spare?
       (@throws[@ball] + @throws[@ball + 1]) == 10
     end
 
