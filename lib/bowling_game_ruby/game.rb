@@ -30,9 +30,9 @@ module BowlingGameRuby
       while current_frame < the_frame
         @first_throw = @throws[@ball]
 
-        score += if @first_throw == 10
+        score += if strike
                    @ball += 1
-                   10 + @throws[@ball] + @throws[@ball + 1]
+                   10 + next_two_balls
                  else
                    handle_second_throw
                  end
@@ -74,6 +74,14 @@ module BowlingGameRuby
         @ball += 2
         frame_score
       end
+    end
+
+    def strike
+      @first_throw == 10
+    end
+
+    def next_two_balls
+      @throws[@ball] + @throws[@ball + 1]
     end
   end
 end
