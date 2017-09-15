@@ -25,33 +25,23 @@ module BowlingGameRuby
 
     def score_for_frame(the_frame)
       score = 0
-      ball = 0
+      @ball = 0
       current_frame = 0
       while current_frame < the_frame
-        first_throw = @throws[ball]
-        ball += 1
-
-        if first_throw == 10
-          score += 10 + @throws[ball] + @throws[ball + 1]
-        else
-          second_throw = @throws[ball]
-          ball += 1
-          frame_score = first_throw + second_throw
-
-          # スペアの得点計算には次のフレームの第１投が必要
-          score += if frame_score == 10
-                     frame_score + @throws[ball]
-                   else
-                     frame_score
-                   end
-        end
+        @first_throw = @throws[@ball]
+        @ball += 1
+        score += if @first_throw == 10
+                   10 + @throws[@ball] + @throws[@ball + 1]
+                 else
+                   handle_second_throw
+                 end
         current_frame += 1
       end
       score
     end
 
     def get_current_frame
-      [11 ,@current_frame].min
+      [11, @current_frame].min
     end
 
     private
@@ -67,6 +57,20 @@ module BowlingGameRuby
       else
         @current_frame += 1
         @first_throw = true
+      end
+    end
+
+    def handle_second_throw
+      frame_score = 0
+      second_throw = @throws[@ball]
+      @ball += 1
+      frame_score = @first_throw + second_throw
+
+      # スペアの得点計算には次のフレームの第１投が必要
+      if frame_score == 10
+        frame_score + @throws[@ball]
+      else
+        frame_score
       end
     end
   end
