@@ -27,13 +27,19 @@ module BowlingGameRuby
       score = 0
       @ball = 0
       current_frame = 0
+      
       while current_frame < the_frame
-        score += if strike
-                   @ball += 1
-                   10 + next_two_balls
-                 else
-                   handle_second_throw
-                 end
+        if strike
+          @ball += 1
+          score += 10 + next_two_balls
+        elsif spare
+          @ball += 2
+          score += 10 + next_ball
+        else
+          score += two_balls_in_frame
+          @ball += 2
+        end
+
         current_frame += 1
       end
       score
@@ -57,20 +63,6 @@ module BowlingGameRuby
         @current_frame += 1
         @first_throw = true
       end
-    end
-
-    def handle_second_throw
-      score = 0
-
-      # スペアの得点計算には次のフレームの第１投が必要
-      if spare
-        @ball += 2
-        score = 10 + next_ball
-      else
-        score = two_balls_in_frame
-        @ball += 2
-      end
-      score
     end
 
     def strike
