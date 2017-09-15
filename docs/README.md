@@ -14,7 +14,7 @@
 ## ユースケース
   
 
-![](assets/300bdaf8e14310a5b12ecf1422e44f030.png?0.6105170373838698)  
+![](assets/300bdaf8e14310a5b12ecf1422e44f030.png?0.5573538873410113)  
   
 ### ユースケース１：ストライク
   
@@ -23,13 +23,21 @@
 require 'test/unit'
 class Game
   def initialize
-    @score = 0
-    @current_throw = 0
-    @throws = Array.new
+    @throws = Array.new    
+    @current_throw = 0    
+    @score = Score.new(@throws)
   end
   def add(pin)
     @throws[@current_throw] = pin    
     @current_throw += 1
+  end
+  def score
+    @score.score
+  end  
+end
+class Score
+  def initialize(throw)
+    @throws = throw
   end
   def score
     first_throw = @throws[0]
@@ -52,16 +60,16 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/gtlj1s2gs_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/o5c2aplph_code_chunk
 Started
 .
 
-Finished in 0.000428 seconds.
+Finished in 0.000594 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-2336.45 tests/s, 2336.45 assertions/s
+1683.50 tests/s, 1683.50 assertions/s
 </pre>
   
 ### ユースケース２：スペア
@@ -71,9 +79,9 @@ Finished in 0.000428 seconds.
 require 'test/unit'
 class Game
   def initialize
-    @score = 0
-    @current_throw = 0
-    @throws = Array.new
+    @throws = Array.new    
+    @current_throw = 0    
+    @score = Score.new(@throws)
   end
   def add(pin)
     @throws[@current_throw] = pin    
@@ -81,6 +89,14 @@ class Game
   end  
   
   def score        
+    @score.score
+  end
+end
+class Score
+  def initialize(throws)
+    @throws = throws
+  end
+  def score    
     first_throw = @throws[0]
     second_throw = @throws[1]
     third_throw = @throws[2]
@@ -91,7 +107,7 @@ class Game
       @score = spare + third_throw + fourth_throw
     else
       @score = score + third_throw + fourth_throw
-    end
+    end    
   end
 end
 class TestGame < Test::Unit::TestCase
@@ -105,16 +121,16 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/ek4pa3tlg_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/mt9anbfqa_code_chunk
 Started
 .
 
-Finished in 0.000518 seconds.
+Finished in 0.000575 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-1930.50 tests/s, 1930.50 assertions/s
+1739.13 tests/s, 1739.13 assertions/s
 </pre>
   
 ### ユースケース３：ガター
@@ -124,23 +140,32 @@ Finished in 0.000518 seconds.
 require 'test/unit'
 class Game
   def initialize
-    @score = 0
+    @throws = Array.new(9,0)    
     @current_throw = 0
-    @throws = Array.new(9,0)
+    @score = Score.new(@throws)
   end
   def add(pin)
     @throws[@current_throw] = pin    
     @current_throw += 1
   end
   def score
-    frame = 0
+    @score.score
+  end
+end
+class Score
+  def initialize(throws)
+    @throws = throws    
+  end
+  def score
+    score = 0
+    frame = 0    
     @throws.each do |throw|        
-      @score += throw
+      score += throw
       frame += 1      
       puts "#{frame}:#{@score}"      
     end
-    @score
-  end
+    score
+  end  
 end
 class TestGame < Test::Unit::TestCase
   def test_strike
@@ -152,26 +177,26 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/0hffbnlsy_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/8378b66sp_code_chunk
 Started
-1:0
-2:0
-3:0
-4:0
-5:0
-6:0
-7:0
-8:0
-9:0
-10:0
+1:
+2:
+3:
+4:
+5:
+6:
+7:
+8:
+9:
+10:
 .
 
-Finished in 0.000449 seconds.
+Finished in 0.000599 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-2227.17 tests/s, 2227.17 assertions/s
+1669.45 tests/s, 1669.45 assertions/s
 </pre>
   
 ### ユースケース４：パーフェクト
@@ -180,24 +205,33 @@ Finished in 0.000449 seconds.
 ```ruby
 require 'test/unit'
 class Game
-  def initialize
-    @score = 0
-    @current_throw = 0
+  def initialize    
     @throws = Array.new(10,0)
+    @current_throw = 0    
+    @score = Score.new(@throws)
   end
   def add(pin)
     @throws[@current_throw] = pin    
     @current_throw += 1
   end
   def score       
+    @score.score
+  end
+end
+class Score
+  def initialize(throws)
+    @throws = throws
+  end
+  def score
+    score = 0
     frame = 0
     @throws.each do |throw|      
       pre_throw = throw      
-      @score += 10 + pre_throw + throw
+      score += 10 + pre_throw + throw
       frame += 1      
       puts "#{frame}:#{@score}"      
     end
-    @score
+    score
   end
 end
 class TestGame < Test::Unit::TestCase
@@ -210,26 +244,26 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/wo4h4o2nl_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/szshl3md3_code_chunk
 Started
-1:30
-2:60
-3:90
-4:120
-5:150
-6:180
-7:210
-8:240
-9:270
-10:300
+1:
+2:
+3:
+4:
+5:
+6:
+7:
+8:
+9:
+10:
 .
 
-Finished in 0.000436 seconds.
+Finished in 0.000623 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-2293.58 tests/s, 2293.58 assertions/s
+1605.14 tests/s, 1605.14 assertions/s
 </pre>
   
   
@@ -239,17 +273,25 @@ Finished in 0.000436 seconds.
 ```ruby
 require 'test/unit'
 class Game
-  def initialize
-    @score = 0
+  def initialize    
+    @throws = Array.new(21,0)    
     @current_throw = 0
-    @throws = Array.new(21,0)
+    @score = Score.new(@throws)    
   end
   def add(pin)
     @throws[@current_throw] = pin    
     @current_throw += 1
   end
   def score       
-    133
+    @score.score    
+  end
+end
+class Score
+  def initialize(throws)
+    @throws = throws
+  end
+  def score
+    133    
   end
 end
 class TestGame < Test::Unit::TestCase
@@ -263,22 +305,22 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/923wr6xed_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/bowling_game_ruby/docs/10pexy0oa_code_chunk
 Started
 .
 
-Finished in 0.000389 seconds.
+Finished in 0.000554 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-2570.69 tests/s, 2570.69 assertions/s
+1805.05 tests/s, 1805.05 assertions/s
 </pre>
   
 ## コアモデル
   
 
-![](assets/300bdaf8e14310a5b12ecf1422e44f031.png?0.06419493014555888)  
+![](assets/300bdaf8e14310a5b12ecf1422e44f031.png?0.7257579648585739)  
   
 ## 参照
   

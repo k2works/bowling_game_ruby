@@ -37,14 +37,24 @@ require 'test/unit'
 
 class Game
   def initialize
-    @score = 0
-    @current_throw = 0
-    @throws = Array.new
+    @throws = Array.new    
+    @current_throw = 0    
+    @score = Score.new(@throws)
   end
 
   def add(pin)
     @throws[@current_throw] = pin    
     @current_throw += 1
+  end
+
+  def score
+    @score.score
+  end  
+end
+
+class Score
+  def initialize(throw)
+    @throws = throw
   end
 
   def score
@@ -78,9 +88,9 @@ require 'test/unit'
 
 class Game
   def initialize
-    @score = 0
-    @current_throw = 0
-    @throws = Array.new
+    @throws = Array.new    
+    @current_throw = 0    
+    @score = Score.new(@throws)
   end
 
   def add(pin)
@@ -89,6 +99,16 @@ class Game
   end  
   
   def score        
+    @score.score
+  end
+end
+
+class Score
+  def initialize(throws)
+    @throws = throws
+  end
+
+  def score    
     first_throw = @throws[0]
     second_throw = @throws[1]
     third_throw = @throws[2]
@@ -100,7 +120,7 @@ class Game
       @score = spare + third_throw + fourth_throw
     else
       @score = score + third_throw + fourth_throw
-    end
+    end    
   end
 end
 
@@ -123,9 +143,9 @@ require 'test/unit'
 
 class Game
   def initialize
-    @score = 0
+    @throws = Array.new(9,0)    
     @current_throw = 0
-    @throws = Array.new(9,0)
+    @score = Score.new(@throws)
   end
 
   def add(pin)
@@ -134,14 +154,25 @@ class Game
   end
 
   def score
-    frame = 0
+    @score.score
+  end
+end
+
+class Score
+  def initialize(throws)
+    @throws = throws    
+  end
+
+  def score
+    score = 0
+    frame = 0    
     @throws.each do |throw|        
-      @score += throw
+      score += throw
       frame += 1      
       puts "#{frame}:#{@score}"      
     end
-    @score
-  end
+    score
+  end  
 end
 
 class TestGame < Test::Unit::TestCase
@@ -161,10 +192,10 @@ end
 require 'test/unit'
 
 class Game
-  def initialize
-    @score = 0
-    @current_throw = 0
+  def initialize    
     @throws = Array.new(10,0)
+    @current_throw = 0    
+    @score = Score.new(@throws)
   end
 
   def add(pin)
@@ -173,14 +204,25 @@ class Game
   end
 
   def score       
+    @score.score
+  end
+end
+
+class Score
+  def initialize(throws)
+    @throws = throws
+  end
+
+  def score
+    score = 0
     frame = 0
     @throws.each do |throw|      
       pre_throw = throw      
-      @score += 10 + pre_throw + throw
+      score += 10 + pre_throw + throw
       frame += 1      
       puts "#{frame}:#{@score}"      
     end
-    @score
+    score
   end
 end
 
@@ -202,10 +244,10 @@ end
 require 'test/unit'
 
 class Game
-  def initialize
-    @score = 0
+  def initialize    
+    @throws = Array.new(21,0)    
     @current_throw = 0
-    @throws = Array.new(21,0)
+    @score = Score.new(@throws)    
   end
 
   def add(pin)
@@ -214,7 +256,17 @@ class Game
   end
 
   def score       
-    133
+    @score.score    
+  end
+end
+
+class Score
+  def initialize(throws)
+    @throws = throws
+  end
+
+  def score
+    133    
   end
 end
 
