@@ -62,18 +62,19 @@ module BowlingGameRuby
     end
 
     def handle_second_throw
-      frame_score = 0
+      score = 0
       second_throw = @throws[@ball + 1]
       frame_score = @first_throw + second_throw
 
       # スペアの得点計算には次のフレームの第１投が必要
       if spare
         @ball += 2
-        frame_score + next_ball
+        score = frame_score + next_ball
       else
+        score = two_balls_in_frame
         @ball += 2
-        frame_score
       end
+      score
     end
 
     def strike
@@ -85,11 +86,15 @@ module BowlingGameRuby
     end
 
     def spare
-      @throws[@ball] + @throws[@ball + 1] == 10
+      (@throws[@ball] + @throws[@ball + 1]) == 10
     end
 
     def next_ball
       @throws[@ball]
+    end
+
+    def two_balls_in_frame
+      @throws[@ball] + @throws[@ball + 1]
     end
   end
 end
