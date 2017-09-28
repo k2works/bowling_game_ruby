@@ -7,8 +7,6 @@ module BowlingGameRuby
     def initialize
       @scorer = Scorer.new
       @score = 0
-      @current_throw = 0
-      @throws = Array.new(21, 0)
       @current_frame = 1
       @first_throw = true
     end
