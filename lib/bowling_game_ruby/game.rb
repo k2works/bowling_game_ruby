@@ -6,7 +6,6 @@ module BowlingGameRuby
 
     def initialize
       @scorer = Scorer.new
-      @score = 0
       @current_frame = 1
       @first_throw = true
     end
@@ -17,7 +16,6 @@ module BowlingGameRuby
 
     def add(pins)
       @scorer.add_throw(pins)
-      @score += pins
       addjust_current_frame(pins)
     end
 
