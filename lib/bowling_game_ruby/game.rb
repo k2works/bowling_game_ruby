@@ -26,11 +26,15 @@ module BowlingGameRuby
     private
 
     def addjust_current_frame(pins)
-      if @first_throw && pins == 10 || !@first_throw
+      if strike?(pins) || !@first_throw
         advance_frame
       else
         @first_throw = false
       end
+    end
+
+    def strike?(pins)
+      @first_throw && pins == 10
     end
 
     def advance_frame
