@@ -32,15 +32,19 @@ module BowlingGameRuby
     def addjust_current_frame(pins)
       if @first_throw
         if pins == 10 # ストライク
-          @current_frame += 1
+          advance_frame
           @first_throw = true
         else
           @first_throw = false
         end
       else
-        @current_frame += 1
+        advance_frame
         @first_throw = true
       end
+    end
+
+    def advance_frame
+      @current_frame += 1
     end
   end
 end
