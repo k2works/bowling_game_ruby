@@ -16,32 +16,13 @@ module BowlingGameRuby
     end
 
     def add(pins)
-      @throws[@current_throw] = pins
-      @current_throw += 1
+      @scorer.add_throw(pins)
       @score += pins
       addjust_current_frame(pins)
     end
 
     def score_for_frame(the_frame)
-      score = 0
-      @ball = 0
-      current_frame = 0
-
-      while current_frame < the_frame
-        if strike?
-          @ball += 1
-          score += 10 + next_two_balls
-        elsif spare?
-          @ball += 2
-          score += 10 + next_ball
-        else
-          score += two_balls_in_frame
-          @ball += 2
-        end
-
-        current_frame += 1
-      end
-      score
+      @scorer.score_for_frame(the_frame)
     end
 
     def get_current_frame
@@ -62,26 +43,6 @@ module BowlingGameRuby
         @current_frame += 1
         @first_throw = true
       end
-    end
-
-    def strike?
-      @throws[@ball] == 10
-    end
-
-    def next_two_balls
-      @throws[@ball] + @throws[@ball + 1]
-    end
-
-    def spare?
-      (@throws[@ball] + @throws[@ball + 1]) == 10
-    end
-
-    def next_ball
-      @throws[@ball]
-    end
-
-    def two_balls_in_frame
-      @throws[@ball] + @throws[@ball + 1]
     end
   end
 end
