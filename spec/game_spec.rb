@@ -109,47 +109,4 @@ RSpec.describe BowlingGameRuby::Game do
       end
     end
   end
-
-  describe '#get_current_frame' do
-    context 'when one throw' do
-      it 'return first frame' do
-        g.add(5)
-        expect(g.get_current_frame).to eq(1)
-      end
-    end
-
-    context 'when two throw' do
-      it 'return second frame' do
-        g.add(5)
-        g.add(4)
-        expect(g.get_current_frame).to eq(2)
-      end
-    end
-
-    context 'when spare' do
-      it 'return third frame' do
-        g.add(3)
-        g.add(7)
-        g.add(3)
-        expect(g.get_current_frame).to eq(2)
-      end
-
-      it 'return third frame' do
-        g.add(3)
-        g.add(7)
-        g.add(3)
-        g.add(2)
-        expect(g.get_current_frame).to eq(3)
-      end
-    end
-
-    context 'when perfect game' do
-      it 'return 10th frame' do
-        12.times do
-          g.add(10)
-        end
-        expect(g.get_current_frame).to eq(11)
-      end
-    end
-  end
 end

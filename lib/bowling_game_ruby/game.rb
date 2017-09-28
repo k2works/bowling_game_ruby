@@ -11,7 +11,7 @@ module BowlingGameRuby
     end
 
     def score
-      score_for_frame(get_current_frame - 1)
+      score_for_frame(@current_frame)
     end
 
     def add(pins)
@@ -23,10 +23,6 @@ module BowlingGameRuby
       @scorer.score_for_frame(the_frame)
     end
 
-    def get_current_frame
-      @current_frame
-    end
-
     private
 
     def addjust_current_frame(pins)
@@ -36,7 +32,7 @@ module BowlingGameRuby
       else
         @first_throw = false
       end
-      @current_frame = [11, @current_frame].min
+      @current_frame = [10, @current_frame].min
     end
 
     def adjust_frame_for_strike(pins)
