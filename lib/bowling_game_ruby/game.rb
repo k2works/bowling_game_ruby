@@ -5,6 +5,7 @@ module BowlingGameRuby
     attr_reader :score
 
     def initialize
+      @scorer = Scorer.new
       @score = 0
       @current_throw = 0
       @throws = Array.new(21, 0)
