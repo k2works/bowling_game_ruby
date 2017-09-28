@@ -24,7 +24,7 @@ module BowlingGameRuby
     end
 
     def get_current_frame
-      [11, @current_frame].min
+      @current_frame
     end
 
     private
@@ -41,6 +41,7 @@ module BowlingGameRuby
         advance_frame
         @first_throw = true
       end
+      @current_frame = [11, @current_frame].min
     end
 
     def advance_frame
